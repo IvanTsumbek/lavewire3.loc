@@ -1,0 +1,3 @@
+ <button wire:click="increment">+</button>       вызываем метод
+ @livewire('counter')                            подключение компонента (контроллера)
+<livewire:counter/>                            аналог подключения компонента
