@@ -1,3 +1,16 @@
- <button wire:click="increment">+</button>       вызываем метод
- @livewire('counter')                            подключение компонента (контроллера)
-<livewire:counter/>                            аналог подключения компонента
+Правила:
+Свойства должны быть публичными. Типизация по усмотрению разработчика
+У вьюхи может быть только один корневой контейнер (любой)
+
+@livewire('counter')                            подключение компонента (контроллера)
+<livewire:counter/>                             аналог подключения компонента
+
+<input type="text" wire:model.live='name'>      свойство, .live обновляет его сразу
+<livewire:user.userlist lastname="Doe"/>        передача данных в свойство компонента с блейда
+<livewire:user.userlist :title="$title"/>       если переменная объявлена в блейде. Но с экраном тоже работает
+<livewire:user.userlist :$second_title/>             ---analog
+@livewire('user.user-list', ['title' => $title,])    ---analog
+public function mount(){}                            ---с компонента
+
+<button wire:click="increment">+</button>       вызываем метод increment
+
