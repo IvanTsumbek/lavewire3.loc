@@ -12,5 +12,16 @@
 @livewire('user.user-list', ['title' => $title,])    ---analog
 public function mount(){}                            ---с компонента
 
-<button wire:click="increment">+</button>       вызываем метод increment
+<button wire:click="increment">+</button>                                      вызываем метод increment
+<form wire:submit='save'>                                                      отправка формы (на кнопке тоже желательно type="submit")
+<input type="text" wire:model='username' wire:keydown.shift.enter='addUser'>   кроме клика еще и клавиши
 
+<li  wire:key="{{$user->id}}">                                                 для циклов, чтоб не произошел сбой
+<div wire:loading wire:target='addUser'>Loading</div>                          для отображения скрытых элементов во время действия (для форм, кнопок). Но таргетировать можно только свои методы
+<button wire:click="$refresh" class="btn btn-success mb-2">Refresh</button>   обновление компонента без перезагрузки страницы
+.throttle.3000ms                                                               для задержки. Блокает элемент на это время
+.once                                                                          экшн срабатывает 1 раз
+.debounce.3000ms                                                               для задержки. Срабатывает элемент через это время
+<a href="#" wire:click.prevent="deleteUser({{$user->id}})">Delete</a></li>     .prevent отменяет дефолтное поведение
+wire:confirm="Are you sure?"                                                   подтверждение (удобно для удаления)
+wire:transition                                                                анимация элемента
