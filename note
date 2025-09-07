@@ -24,4 +24,31 @@ public function mount(){}                            ---с компонента
 .debounce.3000ms                                                               для задержки. Срабатывает элемент через это время
 <a href="#" wire:click.prevent="deleteUser({{$user->id}})">Delete</a></li>     .prevent отменяет дефолтное поведение
 wire:confirm="Are you sure?"                                                   подтверждение (удобно для удаления)
-wire:transition                                                                анимация элемента
+wire:transition                                                                анимация элемента (работает только с одним элементом)
+
+
+Валидация используя bootstrap
+<div class="mb-3">
+<input type="email" class="form-control @error('email') is-invalid @enderror" wire:model='email' placeholder="Email">
+@error('email')
+<div class="invalid-feedback"> {{ $message }} </div>
+@enderror
+</div>
+php artisan lang:publish                                                       создается в корне папка с выводами ошибок. Мы можем их переделать. В ключе можем поменять локаль и скачать ошибки на другом языке
+
+Более простой способ валидации. Тогда вообще не нужно во вьюхе что-то делать
+#[Validate('required|min:2|max:30')]
+public string $name;
+
+#[Validate('required', message:'Поле обязательно')]                            вариант со своими сообщениями
+#[Validate('min:2', message:'Минимум 2 буквы')]
+public string $name;
+#[Validate('min:2', as:'Имя')]                                                 алиас для поля
+
+protected function rules(): array                                              можно вынести правила и в метод rules a сообщения в messages
+{ return [
+                    'name' => 'required|min:2|max:30',
+                    'email' => 'required|email|max:30',
+                    'password' => 'required|min:6',];}
+wire:model.live                                                                валидация в режиме реального времени
+wire:model.blur                                                                валидация в режиме реального времени, но только если курсор переключили на другое поле
