@@ -25,8 +25,10 @@
       </nav>
 
       <div class="container my-5">
-
-        <livewire:user.userlist />
+        <div class="row">
+            <livewire:user.usercreate />
+            <livewire:user.userlist />
+        </div>
       </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

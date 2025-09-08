@@ -18,9 +18,10 @@ class UserForm extends Form
     public function saveUser()
     {
         $validated = $this->validate();
-        User::create($validated);
 
+        $user = User::create($validated);
         $this->reset();                                 //очистка всех свойств
         session()->flash('success', 'User created successfully'); //записывае сообщение в сессию. Во вьюхе нужно достать
+        return $user;
     }
 }
