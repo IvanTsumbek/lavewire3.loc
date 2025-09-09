@@ -1,5 +1,5 @@
-<div class="col md-6">
-    <ul>
+<div class="col-md-8">
+    <ul id="users-list">
         @forelse ($users as $user)
             <li wire:key="{{ $user->id }}">{{ $user->name }} ({{ $user->email }}) |
                 <a href="#" wire:click.prevent="delete({{ $user->id }})"
@@ -9,4 +9,5 @@
             <p>User list is empty...</p>
         @endforelse
     </ul>
+    {{ $users->links(data:['scrollTo' => '#users-list'])}}
 </div>
