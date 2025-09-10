@@ -66,3 +66,4 @@ WithoutUrlPagination                                                          о
 $this->resetPage();                                                           сброс пагинации до первой страницы
 php artisan livewire:publish --pagination                                     появятся шаблоны пагинаци, которые мы можем корректировать
 
+<div class="mb-3" wire:ignore>                                                вешаем на тот кусочек вида, который не будет перерендериваться
