@@ -6,7 +6,11 @@ use App\Models\Country;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Livewire\Forms\UserForm;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
+#[Layout('components.layouts.main')]
+#[Title('User Create')]
 class UserCreate extends Component
 {
     use WithFileUploads;
@@ -48,11 +52,14 @@ class UserCreate extends Component
         // session()->flash('success', 'User created successfully');
         // $this->reset('name', 'email', 'password');   очистка выбраных свойств
     }
+ 
     public function render()
     {
         // dump($this->form->country_id);
         return view('livewire.user.user-create', [
             'countries' => Country::all(),
-        ]);
+        ])
+        // ->layout('components.layouts.main')
+        ;
     }
 }

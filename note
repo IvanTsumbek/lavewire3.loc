@@ -76,3 +76,6 @@ public $avatar;
 use WithFileUploads;    импортируем трейт. Обязательно использовать на компоненте,  если даже логику вынесли!!!!
 https://www.youtube.com/watch?v=yEeOwGlAj94&list=PLNvHH49JXUUCkbcg3m3kSmufG4SnirrCv&index=10  22минута видео. Создаем хранилище файлов
 
+#[Layout('components.layouts.main')]                                         смена лейаута и тайтла
+#[Title('User Create')]
+class UserCreate extends Component

@@ -6,7 +6,9 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
+use Livewire\Attributes\Title;
 
+#[Title('Home Page')]
 class UserList extends Component
 {
     use WithPagination;
