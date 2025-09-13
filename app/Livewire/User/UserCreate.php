@@ -2,15 +2,18 @@
 
 namespace App\Livewire\User;
 
-use Livewire\Component;
-use App\Livewire\Forms\UserForm;
 use App\Models\Country;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use App\Livewire\Forms\UserForm;
 
 class UserCreate extends Component
 {
+    use WithFileUploads;
+    
     public UserForm $form;
 
-      // protected function rules(): array
+    // protected function rules(): array
     // {
     //     return [
     //                 'name' => 'required|min:2|max:30',
@@ -33,11 +36,11 @@ class UserCreate extends Component
         // $this->all();                             собирает все данные в массив
         // $this->only(['name', 'password']);        собирает выбранные
         // $this->pull(['name', 'password']);        only + reset
-    //    $validated = $this->validate([
-    //         'name' => 'required|min:2|max:30',
-    //         'email' => 'required|email|max:30',
-    //         'password' => 'required|min:6',
-    //     ]);
+        //    $validated = $this->validate([
+        //         'name' => 'required|min:2|max:30',
+        //         'email' => 'required|email|max:30',
+        //         'password' => 'required|min:6',
+        //     ]);
         // $validated = $this->validate();
         // User::create($validated);
 

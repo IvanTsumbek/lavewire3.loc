@@ -8,6 +8,7 @@ use Livewire\Attributes\Validate;
 
 class UserForm extends Form
 {
+
     // #[Validate('required|min:2|max:30')]
     public string $name = '';
     // #[Validate('required|email|max:30|unique:users,email')]
@@ -16,6 +17,9 @@ class UserForm extends Form
     public string $password = '';
 
     public string $country_id = '';
+
+    #[Validate('nullable|image|extensions:jpg,jpeg,png|max:2048')] 
+    public $avatar;
 
 
     protected function rules(): array
@@ -31,6 +35,10 @@ class UserForm extends Form
     public function saveUser()
     {
         $validated = $this->validate();
+        if($this->avatar){
+            $folders = date('Y') . '/' . date('m') . '/' . date('d');
+            $validated['avatar'] = $this->avatar->store($folders);
+        }
         // dd($validated);
         $user = User::create($validated);
         $this->reset();                                 //очистка всех свойств
