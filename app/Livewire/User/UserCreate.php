@@ -37,6 +37,8 @@ class UserCreate extends Component
     {
         $user = $this->form->saveUser();
         $this->dispatch('user-created', $user);
+        // $this->redirect('/', navigate: true);
+        $this->redirectRoute('home', navigate: true);
         // $this->all();                             собирает все данные в массив
         // $this->only(['name', 'password']);        собирает выбранные
         // $this->pull(['name', 'password']);        only + reset

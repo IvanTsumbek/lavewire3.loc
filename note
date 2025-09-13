@@ -79,3 +79,8 @@ https://www.youtube.com/watch?v=yEeOwGlAj94&list=PLNvHH49JXUUCkbcg3m3kSmufG4Snir
 #[Layout('components.layouts.main')]                                         смена лейаута и тайтла
 #[Title('User Create')]
 class UserCreate extends Component
+
+wire:navigate                                                                без перезагрузки страницы в теге
+$this->redirect('/', navigate: true);                                        редирект без перезагрузки
+$this->redirectRoute('home', navigate: true);                                аналог, но с неймспейсом
+<a class="nav-link" wire:current.strict="active" href="#">Home</a>           wire:current подсвечивает активный элемент, strict обрезает концевой слеш
