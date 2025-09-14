@@ -87,3 +87,7 @@ $this->redirectRoute('home', navigate: true);                                а�
 
 #[Url]                                                                     помогает свойства передавать в параметры строки. Удобно для фильтров
 public int $limit = 10;
+
+public function updating($property, $value)                                updating and updated  зарезервированные методы, которые реагируют на любое изменение
+{if($property == 'search'){
+    $this->resetPage(); };}

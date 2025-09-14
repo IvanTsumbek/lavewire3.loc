@@ -1,9 +1,9 @@
 <div class="col-12">
 
     <div class="d-flex justify-content-between mb-2" id="users-list">
-        
+     
         <div>
-            <select class="form-select" wire:change="changeLimit($event.target.value)">
+            <select class="form-select" wire:model="limit" wire:change="changeLimit">
                 @foreach ($limitList as $k => $v)
                 <option 
                     @if($v == $limit) selected @endif 
@@ -28,7 +28,8 @@
         </div>
 
         <div>
-            <input type="text" class="form-control" id="search" placeholder="Search...">
+            <input type="text" class="form-control" id="search" placeholder="Search..."
+            wire:model.live.debounce.300ms="search">
         </div>
 
     </div>
@@ -60,7 +61,7 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->country->name }}</td>
+                        <td>{{ $user->country_name }}</td>
                         <td><button wire:click="delete({{ $user->id }})" wire:confirm="Are you sure?"
                                 class="btn btn-danger">Delete</a>
                         </td>
