@@ -22,6 +22,24 @@ class UserList extends Component
 
     #[Url]
     public string $search = '';
+    public string $orderByField = 'users.id';   
+    public string $orderByDirection = 'desc';
+    public array $orderByFieldList = [
+        'users.id' => 'ID',
+        'users.name' =>  'Name', 
+        'users.email' =>  'Email', 
+        'countries.name' =>  'Country',
+    ];
+
+    public function changeOrder($field)
+    {
+        if($this->orderByField == $field) {
+            $this->orderByDirection =  $this->orderByDirection == 'asc' ? 'desc' : 'asc';
+            return;
+        }
+        $this->orderByField = $this->orderByFieldList[$field] ? $field : 'users.id';
+        $this->orderByDirection =  'asc';
+    }
 
     public function changeLimit()
     {
@@ -52,27 +70,13 @@ class UserList extends Component
 
     public function render()
     {
-        // $users = User::query()
-        //     ->with('country')
-        //     ->when($this->search, function($query) {
-        //         $query->whereLike('name', '%' . $this->search . '%')
-        //         ->orWhereLike('email', '%' . $this->search . '%');
-        //     })
-        //     ->orderBy('id', 'desc')
-        //     ->paginate($this->getLimit());
-
             $users = User::query()
             ->select('users.id', 'users.name', 'users.email', 'countries.name as country_name')
             ->join('countries', 'users.country_id', '=', 'countries.id')
             ->when($this->search, function($query) {
                 $query->whereAny(['users.name', 'users.email', 'countries.name'], 
-                                  'like', '%' . $this->search . '%');
-
-                // $query->whereLike('users.name', '%' . $this->search . '%')
-                // ->orWhereLike('users.email', '%' . $this->search . '%')
-                // ->orWhereLike('countries.name', '%' . $this->search . '%');
-            })
-            ->orderBy('id', 'desc')
+                                  'like', '%' . $this->search . '%');})
+            ->orderBy($this->orderByField, $this->orderByDirection)
             ->paginate($this->getLimit());
 
         return view('livewire.user.user-list', [

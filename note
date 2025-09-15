@@ -6,6 +6,8 @@
 
 @livewire('counter')                            подключение компонента (контроллера)
 <livewire:counter/>                             аналог подключения компонента
+<x-sort-arrows/>                                подключение вида
+php artisan make:component sort-arrows --view   создание только вида
 
 <input type="text" wire:model.live='name'>      свойство, .live обновляет его сразу
 <livewire:user.userlist lastname="Doe"/>        передача данных в свойство компонента с блейда
