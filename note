@@ -93,3 +93,13 @@ public int $limit = 10;
 public function updating($property, $value)                                updating and updated  зарезервированные методы, которые реагируют на любое изменение
 {if($property == 'search'){
     $this->resetPage(); };}
+
+public function updatedFormCountryId()                                 updated затем название свойста, если во вьюхе стоит live автоматом вызовет метод!!!
+{
+    if ($this->form->country_id) {
+        $this->cities = City::query()
+             ->where('country_id', '=', $this->form->country_id)->get();
+    } else {
+        $this->cities = [];
+    }
+}

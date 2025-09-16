@@ -4,6 +4,7 @@ namespace App\Livewire\Forms;
 
 use Livewire\Form;
 use App\Models\User;
+use Illuminate\Auth\Events\Validated;
 use Livewire\Attributes\Validate;
 
 class UserForm extends Form
@@ -17,6 +18,8 @@ class UserForm extends Form
     public string $password = '';
 
     public string $country_id = '';
+    public string $city_id = '';
+    public string $street_id = '';
 
     #[Validate('nullable|image|extensions:jpg,jpeg,png|max:2048')] 
     public $avatar;
@@ -29,12 +32,15 @@ class UserForm extends Form
             'email' => 'required|email|max:30|unique:users,email',
             'password' => 'required|min:6',
             'country_id' => 'required|exists:countries,id',
+            'city_id' => 'nullable|exists:cities,id',
+            'street_id' => 'nullable|exists:streets,id',
         ];
     }
 
     public function saveUser()
     {
         $validated = $this->validate();
+        dd($validated);
         if($this->avatar){
             $folders = date('Y') . '/' . date('m') . '/' . date('d');
             $validated['avatar'] = $this->avatar->store($folders);
